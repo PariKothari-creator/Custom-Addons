@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="school_class_tree_view" model="ir.ui.view">
+        <field name="name">school.class.list</field>
+        <field name="model">school.class</field>
+        <field name="arch" type="xml">
+            <list string="Class list">
+                <field name="name" string="Class"/>
+                <field name="teacher_id" string="Class Teacher"/>
+            </list>
+        </field>
+    </record>
+
+<!--    Form view-->
+    <record id = "school_class_form_view" model="ir.ui.view">
+        <field name="name">school.class.form</field>
+        <field name="model">school.class</field>
+        <field name="arch" type="xml">
+            <form string="Class form">
+                <sheet>
+                    <group>
+                        <group string="Class Details">
+                            <field name="name" string="Class" required="1"/>
+                        </group>
+                        <group string="Teacher Details">
+                            <field name="teacher_id" string="Class Teacher" options="{'no_create': True}" />
+                            <field name="subject_ids" string="Subjects" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<!--    Action Vieww-->
+    <record id="school_class_action_view" model="ir.actions.act_window">
+        <field name="name">Class</field>
+        <field name="res_model">school.class</field>
+        <field name="view_mode">list,form</field>
+<!--        <field name="groups_id" eval="[(4, ref('school_management.group_teacher')), (4, ref('base.group_system'))]"/>-->
+
+    </record>
+
+</odoo>

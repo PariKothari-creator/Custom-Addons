@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="report_saleorder_custom_line">
+        <h3>Custom Order</h3>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th name="th_description" class="text-start">Description</th>
+                    <th name="th_quantity" class="text-end text-nowrap">Quantity</th>
+                    <th name="th_priceunit" class="text-end text-nowrap">Unit Price</th>
+                    <th name="th_taxes" class="text-end">Taxes</th>
+                    <th name="th_subtotal" class="text-end">
+                        <span>Amount</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="doc.custom_order_line_ids" t-as="line">
+                    <tr>
+                        <td>
+                            <t t-esc="line.product_id.name"/>
+                        </td>
+                        <td class="text-end text-nowrap">
+                            <t t-esc="line.quantity"/>
+                        </td>
+                        <td class="text-end text-nowrap">
+                            <t t-esc="line.price_unit"/>
+                        </td>
+                        <td class="text-end text-nowrap">
+                            <span t-out="taxes">Tax 15%</span>
+                        </td>
+                        <td class="text-end text-nowrap">
+                            <t t-esc="line.quantity*line.price_unit"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+</odoo>

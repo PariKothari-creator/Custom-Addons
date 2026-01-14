@@ -1,0 +1,39 @@
+<odoo>
+<menuitem
+    id="school_menus_root"
+    name="School"
+    groups="school_management.group_teacher,base.group_system"
+/>
+
+<menuitem
+    id="student_menu"
+    name="Student"
+    parent="school_menus_root"
+    action="school_student_action_view"
+    groups="school_management.group_teacher,base.group_system"
+    sequence="1"
+/>
+
+
+
+<menuitem
+    id="class_menu"
+    name="Class"
+    parent="school_menus_root"
+    action="school_class_action_view"
+    groups="school_management.group_teacher,base.group_system"/>
+
+<menuitem
+    id="subject_menu"
+    name="Subject"
+    parent="school_menus_root"
+    action="school_subject_action_view"
+    groups="school_management.group_teacher,base.group_system"/>
+
+<menuitem
+    id="exam_menu"
+    name="Exams"
+    parent="school_menus_root"
+    action="school_exam_action"
+    groups="school_management.group_teacher,base.group_system"/>
+</odoo>

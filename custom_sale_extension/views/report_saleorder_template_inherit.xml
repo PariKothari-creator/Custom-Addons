@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_customorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='page']" position="inside">
+            <t t-call ="custom_sale_extension.report_saleorder_custom_line"/>
+        </xpath>
+    </template>
+</odoo>

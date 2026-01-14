@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_order_line_wizard,access.custom.order.line.wizard,model_custom_order_line_wizard,base.group_user,1,1,1,1
+access_custom_order_line_wizard_line,access.custom.order.line.wizard.line,model_custom_order_line_wizard_line,base.group_user,1,1,1,1
+access_custom_sale_order_line,access.custom.sale.order.line,model_custom_sale_order_line,base.group_user,1,1,1,1
+access_custom_invoice,access.custom.invoice,model_custom_invoice,base.group_user,1,1,1,1
+

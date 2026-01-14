@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="custom_sale_order_line" model="ir.ui.view">
+        <field name="name">custom.sale.order.line</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <page name="order_lines" position="after">
+                <page string="Custom Order Line">
+                    <form>
+                        <group>
+                            <field name="custom_order_line_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="product_id" string="Product"/>
+                                    <field name="quantity" string="Quantity"/>
+                                    <field name="price_unit" string="Unit Price"/>
+                                    <field name="taxes" string="Taxes" widget="many2many_tags"/>
+                                    <field name="amount" string="Amount"/>
+                                </list>
+                            </field>
+                        </group>
+                    </form>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>
