@@ -1,19 +1,26 @@
 # -*- coding: utf-8 -*-
+import xlsxwriter
+import base64
+from io import BytesIO
 from datetime import date
+
 from odoo import models, fields, api, Command
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
+from odoo.http import request
 
 
 class SchoolStudent(models.Model):
     _name = 'school.student'
     _description = 'Student record'
     _order = 'name'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    student_id = fields.Char(string='Student ID')
     name = fields.Char(string='Name', required=True)
-    roll_no = fields.Char(string='Roll No.', required=True)
+    roll_no = fields.Char(string='Roll No.')
     dob = fields.Date(string='Date of Birth')
     age = fields.Integer(string='Age', compute='_compute_age', store=True)
-    is_active = fields.Boolean(string='Is Active', default=True)
+    fees_status = fields.Selection([('paid', 'Paid'), ('unpaid', 'Unpaid')], string='Fees Status', default='unpaid')
     total_fee = fields.Float(string='Total fee', compute='_compute_fees', store=True)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')], string='Gender')
     class_id = fields.Many2one('school.class', string='Class', ondelete='cascade',
@@ -25,6 +32,9 @@ class SchoolStudent(models.Model):
     user_id = fields.Many2one('res.users', string='User')
     email = fields.Char(string='Email', required=True, unique=True)
     exam_given = fields.Boolean(string='Exam Given', compute='_compute_exam_given')
+    exam_ids = fields.One2many('school.exam', 'student_id', string='Exams')
+    display_name = fields.Char(string='Display Name', compute='_compute_display_name')
+    student_count = fields.Integer(compute='_compute_student_count', store=True)
 
     @api.depends('subject_ids')
     def _compute_total_subjects(self):
@@ -98,6 +108,14 @@ class SchoolStudent(models.Model):
             ],
         })
         students.user_id = user.id
+
+        for student in students:
+            if student.class_id:
+                roll = self.env['ir.sequence'].sudo().next_by_code('school.student')
+                student.roll_no = roll.replace('STD', str(student.class_id.name))
+            else:
+                student.roll_no = False
+
         return students
 
     @api.constrains('class_id', 'roll_no')
@@ -133,12 +151,31 @@ class SchoolStudent(models.Model):
             else:
                 student.display_name_full = f"{student.name}-{student.roll_no}"
 
-    def name_get(self):
-        result = []
-        for student in self:
-            if self.env.context.get('from_exam'):
-                name = f"{student.name}-{student.class_id.name}-{student.roll_no}"
+    def _compute_display_name(self):
+        for record in self:
+            if self.env.context.get('exam_dropdown'):
+                record.display_name = f"{record.name}-{record.class_id.name}-{record.roll_no}"
             else:
-                name = f"{student.name}-{student.roll_no}"
-            result.append(name)
-        return result
+                record.display_name = f"{record.name}"
+
+    def action_download_excel(self):
+        student_ids = self.ids
+        ids_str = ",".join(str(i) for i in student_ids)
+        url = f'/student/excel?ids={ids_str}'
+        return {
+            'type': 'ir.actions.act_url',
+            'url': url,
+            'target': 'self',
+        }
+
+    def check_fees_due_reminder(self):
+        students = self.search([
+            ('fees_status', '=', 'unpaid'),
+        ])
+        for student in students:
+            student.message_post(body="Fees is still due.Kindly pay as earliest as possible", subject="Fees Reminder")
+
+    def _compute_student_count(self):
+        for record in self:
+            record.student_count = 1
+

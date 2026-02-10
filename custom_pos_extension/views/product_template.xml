@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<template id="additional_quantity_ui" inherit_id="website_sale.product">
+    <xpath expr="//form[@action='/shop/cart/update']" position="inside">
+        <div class="js_additional_qty_wrapper mt-3 border-top pt-3">
+            <input type="hidden" class="js_product_unit_price" t-att-value="combination_info['price']"/>
+
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <label class="fw-bold mb-1">Extra Quantity</label>
+                    <div class="input-group" style="width: 200px;">
+                        <button type="button" class="btn btn-outline-dark js_add_qty_minus">-</button>
+                        <input type="number" class="form-control text-center js_add_qty_input" value="0" readonly="1"/>
+                        <button type="button" class="btn btn-outline-dark js_add_qty_plus">+</button>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <label class="d-block small text-muted">EXTRA COST </label>
+                    <span class="h5 text-primary">
+                        $ <span class="js_additional_price_display">0.00</span>
+                    </span>
+                </div>
+            </div>
+
+            <input type="hidden" name="additional_qty" class="js_additional_qty_hidden" value="0"/>
+        </div>
+    </xpath>
+</template>
+</odoo>

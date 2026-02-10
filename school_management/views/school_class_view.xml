@@ -25,6 +25,7 @@
                         <group string="Teacher Details">
                             <field name="teacher_id" string="Class Teacher" options="{'no_create': True}" />
                             <field name="subject_ids" string="Subjects" widget="many2many_tags"/>
+                            <field name="advisor" string="Advisor"/>
                         </group>
                     </group>
                 </sheet>

@@ -13,5 +13,5 @@ class SchoolClass(models.Model):
          self.env.ref('school_management.group_teacher').id)
     ],ondelete='set null')
     subject_ids=fields.Many2many('school.subject',string='Subjects',ondelete='cascade')
-
+    advisor = fields.Reference(selection=[('res.partner','Parent/Guardian'),('res.users','Teacher')],string='Advisor')
 

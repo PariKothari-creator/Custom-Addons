@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.NavBar" t-inherit-mode="extension">
+        <xpath expr="//nav" position="inside">
+            <div class="o_session_timer_container d-flex align-items-center ms-auto px-3">
+                <span id="session_timer_display"
+                      class="text-white"
+                      style="font-size: 13px; font-family: monospace; min-width: 140px;">
+                    Session: 0h 0m 0s
+                </span>
+            </div>
+        </xpath>
+    </t>
+</templates>

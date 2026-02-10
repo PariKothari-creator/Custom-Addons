@@ -10,7 +10,7 @@ class SchoolExam(models.Model):
     name=fields.Selection([('mid','Mid Sem'),('end','End Sem'),('quiz','Quiz')], string="Exam Type",required=True)
     exam_date=fields.Date(string="Date of Conduct",required=True)
     image_1920=fields.Image(string="Invigilator Sign")
-    student_id=fields.Many2one('school.student',string="Students", context={'from_exam':True})
+    student_id=fields.Many2one('school.student',string="Students", context={'exam_dropdown':True})
     class_id=fields.Many2one('school.class',string="Class" ,store=True,readonly=True,related='student_id.class_id')
     exam_subjects_ids=fields.One2many('exam.subjects','exam_id',string="Exam Subjects")
     total_marks=fields.Integer(string="Total Marks",compute='_compute_total_marks',store=True)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_report_student_details" model="ir.actions.report">
+        <field name="name">Student Reports</field>
+        <field name="model">school.student</field>git
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_management.report_student_details</field>
+        <field name="report_file">school_management.report_student_details</field>
+        <field name="binding_model_id" ref="model_school_student"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[(4,ref('school_management.group_report_download'))]"/>
+    </record>
+</odoo>

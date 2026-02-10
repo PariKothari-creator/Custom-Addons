@@ -4,62 +4,66 @@
         <field name="name">school.exam.list</field>
         <field name="model">school.exam</field>
         <field name="arch" type="xml">
-                <list string="Exams">
-                    <field name="name" string="Exam Type"/>
-                    <field name="student_id"  string="Students" context="{'from_exam': True}"/>
-                    <field name="class_id" widget="many2one_tags" string="Class"/>
-                    <field name="exam_date" string="Exam Date"/>
-                    <field name="total_marks" string="Total Marks" readonly="1"/>
-                    <field name="avg_marks" string="Average Marks" readonly="1"/>
-                    <field name="result" string="Result" readonly="1"/>
-                </list>
+            <list string="Exams">
+                <field name="name" string="Exam Type"/>
+                <field name="student_id" string="Students"/>
+                <field name="class_id" widget="many2one_tags" string="Class"/>
+                <field name="exam_date" string="Exam Date"/>
+                <field name="total_marks" string="Total Marks" readonly="1"/>
+                <field name="avg_marks" string="Average Marks" readonly="1"/>
+                <field name="result" string="Result" readonly="1"/>
+            </list>
         </field>
     </record>
 
     <record id="school_exam_form_view" model="ir.ui.view">
-       <field name="name">school.exam.form</field>
+        <field name="name">school.exam.form</field>
         <field name="model">school.exam</field>
         <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group col="2">
-                            <group string="Exam Details">
-                                <field name="name" string="Exam Name"/>
-                                <field name="exam_date" string="Exam Date"/>
-                                <field name="image_1920" string="Invigilator Sign" widget="image" class="oe_avatar"/>
-                            </group>
-
-                            <group string="Student Details">
-                                <field name="student_id" string="Student" options="{'no_create':True}"/>
-                                <field name="class_id" string="Class"/>
-                            </group>
+            <form>
+                <sheet>
+                    <group col="2">
+                        <group string="Exam Details">
+                            <field name="name" string="Exam Name"/>
+                            <field name="exam_date" string="Exam Date"/>
+                            <field name="image_1920" string="Invigilator Sign" widget="image" class="oe_avatar"/>
                         </group>
 
-                        <group string="Subject Marks">
-                            <field name="exam_subjects_ids">
-                                <list editable="bottom" create="false" delete="false">
-                                    <field name="subject_id" string="Subject" readonly="1" force_save="1"/>
-                                    <field name="marks" string="Marks"/>
-                                    <field name="max_marks" string="Max Marks"/>
-
-                                </list>
-                            </field>
+                        <group string="Student Details">
+                            <field name="student_id" string="Student"
+                                   options="{'no_create':True,'dropdown_display_field':'display_name'}"/>
+                            <field name="class_id" string="Class"/>
                         </group>
+                    </group>
 
-                        <div class="row mt16">
-                                <div class="col-8"/>
-                                <div class="col-4">
-                                        <group>
-                                            <field name="total_marks" readonly="1" string="Total Marks"/>
-                                            <field name="avg_marks" readonly="1" string="Average Marks"/>
-                                            <field name="result" readonly="1" string="Result" force_save="1"/>
-                                        </group>
-                                </div>
+                    <group string="Subject Marks">
+                        <field name="exam_subjects_ids">
+                            <list editable="bottom" create="false" delete="false">
+                                <field name="subject_id" string="Subject" readonly="1" force_save="1"/>
+                                <field name="marks" string="Marks"/>
+                                <field name="max_marks" string="Max Marks"/>
+
+                            </list>
+                        </field>
+                    </group>
+
+                    <div class="row mt16">
+                        <div class="col-8"/>
+                        <div class="col-4">
+                            <group>
+                                <field name="total_marks" readonly="1" string="Total Marks"/>
+                                <field name="avg_marks" readonly="1" string="Average Marks"/>
+                                <field name="result" readonly="1" string="Result" force_save="1"/>
+                            </group>
                         </div>
-                    </sheet>
-                </form>
+                    </div>
+                </sheet>
+            </form>
         </field>
     </record>
+
+
+
 
     <record id="school_exam_action" model="ir.actions.act_window">
         <field name="name">Exam</field>

@@ -3,7 +3,7 @@
     'version': '1.0',
     'summary': 'performing inheritance',
     'description': 'Inheritance practice',
-    'depends':['base','sale'],
+    'depends':['base','sale','mail'],
     'data':[
         'security/ir.model.access.csv',
         'views/sale_extension_views.xml',

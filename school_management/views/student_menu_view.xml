@@ -1,39 +1,66 @@
 <odoo>
-<menuitem
-    id="school_menus_root"
-    name="School"
-    groups="school_management.group_teacher,base.group_system"
-/>
+    <menuitem
+            id="school_menus_root"
+            name="School"
+            groups="school_management.group_teacher,base.group_system"
+    />
 
-<menuitem
-    id="student_menu"
-    name="Student"
-    parent="school_menus_root"
-    action="school_student_action_view"
-    groups="school_management.group_teacher,base.group_system"
-    sequence="1"
-/>
+    <menuitem
+            id="student_menu"
+            name="Student"
+            parent="school_menus_root"
+            action="school_student_action_view"
+            groups="school_management.group_teacher,base.group_system"
+            sequence="1"
+    />
+
+    <menuitem
+            id="class_menu"
+            name="Class"
+            parent="school_menus_root"
+            action="school_class_action_view"
+            groups="school_management.group_teacher,base.group_system"/>
+
+    <menuitem
+            id="subject_menu"
+            name="Subject"
+            parent="school_menus_root"
+            action="school_subject_action_view"
+            groups="school_management.group_teacher,base.group_system"/>
+
+    <menuitem
+            id="exam_menu"
+            name="Exams"
+            parent="school_menus_root"
+            action="school_exam_action"
+            groups="school_management.group_teacher,base.group_system"/>
+
+    <menuitem
+            id="config_menu"
+            name="Configuration"
+            parent="school_menus_root"/>
+
+    <menuitem id="setting_menu"
+              name="Settings"
+              parent="config_menu"
+              action="school_management.action_school_settings"/>
+
+    <menuitem id="student_feedback_menu"
+              name="Feedback"
+              parent="school_menus_root"
+              groups="school_management.group_teacher,base.group_system"/>
 
 
 
-<menuitem
-    id="class_menu"
-    name="Class"
-    parent="school_menus_root"
-    action="school_class_action_view"
-    groups="school_management.group_teacher,base.group_system"/>
+    <menuitem id="student_feedback_form"
+              name = "Feedback Form"
+              parent="student_feedback_menu"
+              action="action_student_feedback"/>
 
-<menuitem
-    id="subject_menu"
-    name="Subject"
-    parent="school_menus_root"
-    action="school_subject_action_view"
-    groups="school_management.group_teacher,base.group_system"/>
+    <menuitem id="students_feedback_list"
+              name="Feedback List"
+              parent="student_feedback_menu"
+              action='action_student_feedback_list'
+    />
 
-<menuitem
-    id="exam_menu"
-    name="Exams"
-    parent="school_menus_root"
-    action="school_exam_action"
-    groups="school_management.group_teacher,base.group_system"/>
 </odoo>

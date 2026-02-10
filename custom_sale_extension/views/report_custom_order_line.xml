@@ -16,23 +16,30 @@
                 </tr>
             </thead>
             <tbody>
-                <t t-foreach="doc.custom_order_line_ids" t-as="line">
+                <t t-if="doc.custom_order_line_ids | length > 0">
+                    <t t-foreach="doc.custom_order_line_ids" t-as="line">
+                        <tr>
+                            <td>
+                                <t t-esc="line.product_id.name"/>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <t t-esc="line.quantity"/>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <t t-esc="line.price_unit"/>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <span t-out="taxes">Tax 15%</span>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <t t-esc="line.quantity*line.price_unit"/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+               <t t-else="">
                     <tr>
-                        <td>
-                            <t t-esc="line.product_id.name"/>
-                        </td>
-                        <td class="text-end text-nowrap">
-                            <t t-esc="line.quantity"/>
-                        </td>
-                        <td class="text-end text-nowrap">
-                            <t t-esc="line.price_unit"/>
-                        </td>
-                        <td class="text-end text-nowrap">
-                            <span t-out="taxes">Tax 15%</span>
-                        </td>
-                        <td class="text-end text-nowrap">
-                            <t t-esc="line.quantity*line.price_unit"/>
-                        </td>
+                        <td colspan="5" class="text-center">No Custom Order available.</td>
                     </tr>
                 </t>
             </tbody>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_student_details">
+        <t t-call="web.external_layout">
+            <main>
+                <t t-foreach="docs" t-as="doc">
+
+
+                    <div class="page">
+
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h3>PERSONAL DETAILS</h3>
+                                Name :
+                                <t t-esc="doc.name"/>
+                                <br/>
+                                Date of Birth :
+                                <t t-esc="doc.dob"/>
+                                <br/>
+                                Age :
+                                <t t-esc="doc.age"/>
+                                <br/>
+                                Gender :
+                                <t t-esc="doc.gender"/>
+                                <br/>
+                                Email :
+                                <t t-esc="doc.email"/>
+                                <br/>
+                            </div>
+
+                            <div class="col-6">
+                                <h3>ACADEMIC DETAILS</h3>
+                                Roll No :
+                                <t t-esc="doc.roll_no"/>
+                                <br/>
+                                Class :
+                                <t t-esc="doc.class_id.name"/>
+                                <br/>
+                                Total Fee :
+                                <t t-esc="doc.total_fee"/>
+                                <br/>
+                                Total Subjects :
+                                <t t-esc="doc.total_subjects"/>
+                                <br/>
+                            </div>
+                        </div>
+                        <div style="page-break-after: always; height:650px; width:100%; margin-top:30px; display:table;">
+                            <div style="display:table-row;">
+                            <h3>Exam Details</h3>
+                            </div>
+                            <t t-if="doc.exam_ids">
+                                <t t-foreach="doc.exam_ids" t-as="exam">
+                                    Exam Name :
+                                    <t t-esc="exam.name"/>
+                                    <br/>
+                                    Exam Date :
+                                    <t t-esc="exam.exam_date"/>
+                                    <br/>
+                                    <table class="table table-sm" style="width:60%;">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-start text-nowrap">Subject</th>
+                                                <th style="text-align:right;">Marks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="exam.exam_subjects_ids" t-as="line">
+                                                <tr>
+                                                    <td class="text-start text-nowrap">
+                                                        <t t-esc="line.subject_id.name"/>
+                                                    </td>
+                                                    <td style="text-align:right;" class="text-end text-nowrap">
+                                                        <t t-esc="line.marks"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <p>
+                                            <strong>Total Marks :</strong>
+                                            <t t-esc="exam.total_marks"/>
+                                        </p>
+                                        <p>
+                                            <strong>Result :</strong>
+                                            <t t-esc="exam.result"/>
+                                        </p>
+                                    </div>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <p>No exam details available.</p>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+</odoo>
+

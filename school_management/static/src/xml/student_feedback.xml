@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template xml:space="preserve">
+    <t t-name="student_feedback.FeedbackForm">
+        <t t-debug="pdb"/>
+        <div class="o_form_view p-4">
+            <h2>Students Feedback Form</h2>
+            <div class="form-group mt-3">
+                <label>Date of Feedback</label>
+                <input type="date" t-model="state.feedback_date" class="o_input" required="required"/>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="Class">Class</label>
+                <select t-on-change="onClassChange" t-model="state.class_id" class="o_input" required="required">
+                    <option value="">Select Class</option>
+                    <t t-foreach="state.classes" t-as="classes" t-key="classes.id">
+                        <option t-att-value="classes.id">
+                            <t t-esc="classes.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="student">Student</label>
+                <select t-model="state.student_id" class="o_input" required="required">
+                    <option value="">Select Student</option>
+                    <t t-foreach="state.students" t-as="student" t-key="student.id">
+                            <option t-att-value="student.id">
+                            <t t-esc="student.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+
+
+            <div class="form-group mt-3">
+                <label for="discipline_grade">Discipline Grade</label>
+                <br/>
+                <input type="radio" value="A" t-model="state.discipline_grade"/>A
+                <br/>
+                <input type="radio" value="B" t-model="state.discipline_grade"/>B
+                <br/>
+                <input type="radio" value="C" t-model="state.discipline_grade"/>C
+                <br/>
+                <input type="radio" value="D" t-model="state.discipline_grade"/>D
+                <br/>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="remarks">Remarks</label>
+                <textarea t-model="state.remarks" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="rating">Rating</label>
+                <div class="star-rating">
+                    <input  type="radio" id="star5" name="rating" value="5"
+                            t-model="state.rating"/>
+                    <label for="star5">★</label>
+                    <input  type="radio" id="star4" name="rating" value="4"
+                            t-model="state.rating"/>
+                    <label for="star4">★</label>
+                    <input  type="radio" id="star3" name="rating" value="3"
+                            t-model="state.rating"/>
+                    <label for="star3">★</label>
+                    <input  type="radio" id="star2" name="rating" value="2"
+                            t-model="state.rating"/>
+                    <label for="star2">★</label>
+                    <input  type="radio" id="star1" name="rating" value="1"
+                            t-model="state.rating"/>
+                    <label for="star1">★</label>
+
+                </div>
+            </div>
+
+
+            <button type="button" t-on-click="submitFeedback" class="btn btn-primary mt-3 px-4"
+                    style="display:inline-block; width:fit-content;"><span>Submit</span>
+            </button>
+        </div>
+    </t>
+</template>

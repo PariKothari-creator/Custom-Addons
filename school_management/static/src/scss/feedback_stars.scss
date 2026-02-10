@@ -1,0 +1,22 @@
+.star-rating{
+    display: flex;
+    flex-direction:row-reverse;
+    justify-content: flex-end;
+    font-size: 2rem;
+    margin-top:5px;
+   }
+.star-rating input{
+    display:none;
+    }
+.star-rating label{
+    cursor:pointer;
+    color: black;
+    }
+.star-rating label:hover,
+.star-rating label:hover ~label{
+    color:gold;
+    }
+
+.star-rating input:checked~label{
+    color:gold;
+    }

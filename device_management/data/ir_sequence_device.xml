@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="device_management_sequence" model="ir.sequence">
+        <field name="name">Sequence</field>
+        <field name="code">device_type</field>
+        <field name="prefix">DEVICE/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+    </record>
+
+</odoo>

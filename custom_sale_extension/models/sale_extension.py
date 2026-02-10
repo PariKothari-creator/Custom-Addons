@@ -8,6 +8,7 @@ class SaleExtension(models.Model):
     customer_phone = fields.Char(string="Customer Phone")
     custom_order_line_ids = fields.One2many('custom.sale.order.line', 'order_id')
 
+
     def action_customize_order_line(self):
         return {
             'name': 'Customize Order Line',

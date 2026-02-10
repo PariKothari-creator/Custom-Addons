@@ -13,3 +13,5 @@ access_school_class_teacher,school.class.teacher,model_school_class,school_manag
 access_school_subject_teacher,school.subject.teacher,model_school_subject,school_management.group_teacher,1,1,1,1
 access_school_exam_teacher,school.exam.teacher,model_school_exam,school_management.group_teacher,1,1,1,1
 access_exam_subjects_teacher,exam.subjects.teacher,model_exam_subjects,school_management.group_teacher,1,1,1,1
+access_students_feedback_teacher,students.feedback.teacher,model_students_feedback,school_management.group_teacher,1,1,1,1
+access_students_feedback_admin,students.feedback.admin,model_students_feedback,base.group_system,1,1,1,1
