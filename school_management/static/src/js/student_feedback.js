@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import {registry} from "@web/core/registry";
-import {Component,useState} from "@odoo/owl";
+import {Component,useState,onWillStart, onMounted, onWillUnmount} from "@odoo/owl";
 import {rpc} from "@web/core/network/rpc";
 import { user } from "@web/core/user";
 import { useService } from "@web/core/utils/hooks";
@@ -29,8 +29,27 @@ class StudentFeedbackClient extends Component{
         remarks:""
 
       });
-      this.loadStudents();
+
+      onWillStart(async () => {
+            await this.loadStudents();
+        });
+
+        onMounted(() => {
+            const firstInput = document.querySelector('select');
+            if (firstInput) {
+                firstInput.focus();
+                console.log("Autofocused on first dropdown");
+            }
+        });
+
+        onWillUnmount(() => {
+            console.log("User is leaving the feedback form");
+        });
+
     }
+
+
+
 
     async loadStudents(){
 
@@ -99,3 +118,4 @@ class StudentFeedbackClient extends Component{
     }
   }
        registry.category("actions").add("student_feedback",StudentFeedbackClient);
+

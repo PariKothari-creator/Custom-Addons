@@ -35,6 +35,7 @@ class SchoolStudent(models.Model):
     exam_ids = fields.One2many('school.exam', 'student_id', string='Exams')
     display_name = fields.Char(string='Display Name', compute='_compute_display_name')
     student_count = fields.Integer(compute='_compute_student_count', store=True)
+    company_id = fields.Many2one('res.company',string="Company", default=lambda self: self.env.company)
 
     @api.depends('subject_ids')
     def _compute_total_subjects(self):

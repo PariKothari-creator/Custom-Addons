@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="school_management.GenericMarksTimeline">
+        <div class="o_generic_timeline d-flex align-items-start p-3">
+
+            <t t-if="items.length > 0">
+                <t t-foreach="items" t-as="item" t-key="item.id">
+
+                    <div class="d-flex flex-column align-items-center">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="status-circle d-flex align-items-center justify-content-center text-white fw-bold"
+                                 t-attf-style="background-color: {{ getColor(item) }};">
+                                <span style="font-size: 10px;" t-esc="item.val"/>
+                            </div>
+
+                            <t t-if="!item_last">
+                                <div class="status-line"></div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+            <t t-else="">
+                <div class="text-muted small">No records found...</div>
+            </t>
+        </div>
+    </t>
+</templates>

@@ -13,3 +13,4 @@ class StudentsFeedback(models.Model):
     class_id = fields.Many2one('school.class',string='Class',required=True)
     feedback_date = fields.Datetime(string='Date',required=True)
     discipline_grade = fields.Char(string='Discipline Grade')
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)

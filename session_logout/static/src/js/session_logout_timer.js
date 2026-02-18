@@ -3,6 +3,8 @@
 import { browser } from "@web/core/browser/browser";
 import { session } from "@web/session";
 import { registry } from "@web/core/registry";
+import { patch } from "@web/core/utils/patch";
+import { FormController } from "@web/views/form/form_controller";
 
 const sessionTimerService = {
     start() {
@@ -23,10 +25,16 @@ const sessionTimerService = {
         let intervalId = null;
 
         function formatTime(sec) {
+            const d = Math.floor(sec / (3600 * 24));
             const h = Math.floor(sec / 3600);
             const m = Math.floor((sec % 3600) / 60);
             const s = sec % 60;
+            if(d>0){
+              return `${d}d ${h}h ${m}m ${s}s`;
+              }
+            else{
             return `${h}h ${m}m ${s}s`;
+            }
         }
 
         function updateUI() {
@@ -64,4 +72,17 @@ const sessionTimerService = {
     },
 };
 
+const reloadService = {
+    dependencies: ["bus_service"],
+    start(env, { bus_service }) {
+
+        bus_service.subscribe("reload_page", (loading) => {
+            if (loading.refresh) {
+                console.log("Timer settings changed. Reloading...");
+                browser.location.reload();
+            }
+        });
+    },
+};
+registry.category("services").add("reloadService", reloadService)
 registry.category("services").add("sessionTimerService", sessionTimerService);

@@ -14,4 +14,5 @@ class SchoolClass(models.Model):
     ],ondelete='set null')
     subject_ids=fields.Many2many('school.subject',string='Subjects',ondelete='cascade')
     advisor = fields.Reference(selection=[('res.partner','Parent/Guardian'),('res.users','Teacher')],string='Advisor')
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
 

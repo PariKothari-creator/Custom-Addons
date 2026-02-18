@@ -1,0 +1,21 @@
+.o_generic_timeline {
+    min-height: 50px;
+    width: 100%;
+
+    .status-circle {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        z-index: 2;
+    }
+
+    .status-line {
+        width: 30px;
+        height: 4px;
+        background-color: #dee2e6;
+        margin: 0 -1px;
+        z-index: 1;
+    }
+}

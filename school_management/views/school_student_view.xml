@@ -47,6 +47,15 @@
                             string="Exams"
                             class="btn-primary"
                             invisible="not exam_given"/>
+
+                    <div class="flex-grow-1">
+                        <field name="exam_ids" widget="marks_timeline_generic" nolabel="1">
+                            <list invisible="1">
+                                <field name="name"/>
+                                <field name="result"/>
+                            </list>
+                        </field>
+                    </div>
                 </header>
                 <sheet>
                     <group col="2">
@@ -61,6 +70,7 @@
                             <field name="email"/>
                         </group>
                         <group string="Academic Details">
+                            <field name="company_id" invisible="1"/>
                             <field name="roll_no"/>
                             <field name="class_id" options="{'no_create': True}"/>
                             <field name="total_fee" readonly="1"/>
@@ -128,7 +138,7 @@
         </field>
     </record>
 
-<!--    Pivot-->
+    <!--    Pivot-->
     <record id="school_student_pivot_view" model="ir.ui.view">
         <field name="name">school.student.pivot</field>
         <field name="model">school.student</field>
@@ -141,8 +151,8 @@
         </field>
     </record>
 
-<!--    Graph-->
-     <record id="school_student_graph_view" model="ir.ui.view">
+    <!--    Graph-->
+    <record id="school_student_graph_view" model="ir.ui.view">
         <field name="name">school.student.graph</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
@@ -151,8 +161,7 @@
                 <field name="student_count" type="measure"/>
             </graph>
         </field>
-     </record>
-
+    </record>
 
     <!-- Action -->
     <record id="school_student_action_view" model="ir.actions.act_window">
@@ -161,3 +170,4 @@
         <field name="view_mode">kanban,graph,list,form,pivot</field>
     </record>
 </odoo>
+

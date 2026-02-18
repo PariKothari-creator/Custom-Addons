@@ -20,9 +20,42 @@
         </field>
     </record>
 
-     <record id="action_student_feedback_list" model="ir.actions.act_window">
+    <record id="view_student_feedback_form_popup" model="ir.ui.view">
+        <field name="name">students.feedback.form</field>
+        <field name="model">students.feedback</field>
+        <field name="arch" type="xml">
+            <form string="Student Feedback Details">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="student_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Basic Info">
+                            <field name="class_id" readonly="1"/>
+                            <field name="teacher_id" readonly="1"/>
+                        </group>
+                        <group string="Ratings">
+                            <field name="rating" />
+                            <field name="discipline_grade"/>
+                        </group>
+                    </group>
+                    <group string="Teacher's Remarks">
+                        <field name="remarks" nolabel="1" placeholder="No remarks added..."/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="save" string="Save Changes" type="object" class="btn-primary" special="save"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_student_feedback_list" model="ir.actions.act_window">
         <field name="name">Student</field>
         <field name="res_model">students.feedback</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

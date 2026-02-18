@@ -16,6 +16,8 @@ class SchoolExam(models.Model):
     total_marks=fields.Integer(string="Total Marks",compute='_compute_total_marks',store=True)
     avg_marks=fields.Integer(string="Average Marks",compute='_compute_avg_marks',store=True)
     result=fields.Selection([('pass','Pass'),('fail','Fail')],string="Result")
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    widget_placeholder = fields.Integer(string="Progress", default=0)
 
     @api.depends('exam_subjects_ids.marks')
     def _compute_avg_marks(self):

@@ -36,6 +36,14 @@
                         </group>
                     </group>
 
+                    <group>
+                        <field name="exam_subjects_ids"
+                               widget="marks_timeline_generic"
+                               nolabel="1"
+                               readonly="1"
+                               force_save="1"/>
+                    </group>
+
                     <group string="Subject Marks">
                         <field name="exam_subjects_ids">
                             <list editable="bottom" create="false" delete="false">
@@ -61,8 +69,6 @@
             </form>
         </field>
     </record>
-
-
 
 
     <record id="school_exam_action" model="ir.actions.act_window">
